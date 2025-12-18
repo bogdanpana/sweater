@@ -1,0 +1,519 @@
+/* Christmas Theme Styles */
+@import url('https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@400;700&family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  color-scheme: dark;
+  --christmas-red: #dc2626;
+  --christmas-green: #16a34a;
+  --christmas-gold: #fbbf24;
+  --christmas-dark: #0a0e13;
+  --christmas-dark-alt: #1a1f2e;
+  --christmas-border: rgba(220, 38, 38, 0.3);
+  --christmas-text: #fef3c7;
+  --christmas-text-dim: rgba(254, 243, 199, 0.7);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, #0a0e13 0%, #1a1f2e 50%, #0a0e13 100%);
+  background-attachment: fixed;
+  color: var(--christmas-text);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  margin: 0;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Background image blur overlay - very subtle */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('/images/bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  opacity: 0.08;
+  filter: blur(3px);
+  z-index: -2;
+  pointer-events: none;
+  will-change: transform;
+}
+
+/* Snow animation background with gradient overlay */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    linear-gradient(135deg, rgba(10, 14, 19, 0.92) 0%, rgba(26, 31, 46, 0.92) 50%, rgba(10, 14, 19, 0.92) 100%),
+    radial-gradient(2px 2px at 20% 30%, white, transparent),
+    radial-gradient(2px 2px at 60% 70%, white, transparent),
+    radial-gradient(1px 1px at 50% 50%, white, transparent),
+    radial-gradient(1px 1px at 80% 10%, white, transparent),
+    radial-gradient(2px 2px at 90% 40%, white, transparent),
+    radial-gradient(1px 1px at 33% 60%, white, transparent),
+    radial-gradient(2px 2px at 10% 80%, white, transparent);
+  background-size: 100% 100%, 200% 200%, 200% 200%, 200% 200%, 200% 200%, 200% 200%, 200% 200%;
+  background-position: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  animation: snowfall 20s linear infinite;
+  pointer-events: none;
+  opacity: 1;
+  z-index: -1;
+}
+
+@keyframes snowfall {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 0% 100%;
+  }
+}
+
+/* Twinkling stars effect */
+body::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: 
+    radial-gradient(1px 1px at 25% 25%, var(--christmas-gold), transparent),
+    radial-gradient(1px 1px at 75% 25%, var(--christmas-gold), transparent),
+    radial-gradient(1px 1px at 50% 50%, var(--christmas-gold), transparent),
+    radial-gradient(1px 1px at 10% 75%, var(--christmas-gold), transparent),
+    radial-gradient(1px 1px at 90% 75%, var(--christmas-gold), transparent);
+  animation: twinkle 3s ease-in-out infinite alternate;
+  pointer-events: none;
+  opacity: 0.4;
+  z-index: 1;
+}
+
+@keyframes twinkle {
+  0% { opacity: 0.2; }
+  100% { opacity: 0.6; }
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+/* Christmas button styles */
+.christmas-button {
+  background: linear-gradient(135deg, var(--christmas-red) 0%, #b91c1c 100%);
+  border: 2px solid var(--christmas-gold);
+  color: white;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(220, 38, 38, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.christmas-button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.christmas-button:hover::before {
+  left: 100%;
+}
+
+.christmas-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(220, 38, 38, 0.5);
+}
+
+.christmas-button:active {
+  transform: translateY(0);
+}
+
+.christmas-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Christmas card styles */
+.christmas-card {
+  background: linear-gradient(135deg, rgba(26, 31, 46, 0.9) 0%, rgba(10, 14, 19, 0.9) 100%);
+  border: 2px solid var(--christmas-border);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  position: relative;
+  backdrop-filter: blur(10px);
+}
+
+.christmas-card::before {
+  content: '';
+  position: absolute;
+  top: -2px;
+  left: -2px;
+  right: -2px;
+  bottom: -2px;
+  background: linear-gradient(45deg, var(--christmas-red), var(--christmas-green), var(--christmas-gold), var(--christmas-red));
+  border-radius: 20px;
+  z-index: -1;
+  opacity: 0.3;
+  animation: borderGlow 3s ease infinite;
+}
+
+@keyframes borderGlow {
+  0%, 100% { opacity: 0.2; }
+  50% { opacity: 0.4; }
+}
+
+/* Christmas badge */
+.christmas-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border: 2px solid;
+  transition: all 0.3s ease;
+}
+
+.christmas-badge.done {
+  background: linear-gradient(135deg, rgba(22, 163, 74, 0.2) 0%, rgba(22, 163, 74, 0.1) 100%);
+  border-color: var(--christmas-green);
+  color: #86efac;
+}
+
+.christmas-badge.pending {
+  background: linear-gradient(135deg, rgba(251, 191, 36, 0.2) 0%, rgba(251, 191, 36, 0.1) 100%);
+  border-color: var(--christmas-gold);
+  color: #fde68a;
+}
+
+/* Christmas title */
+.christmas-title {
+  font-family: 'Mountains of Christmas', cursive;
+  font-weight: 700;
+  background: linear-gradient(135deg, var(--christmas-red) 0%, var(--christmas-gold) 50%, var(--christmas-green) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-shadow: 0 0 30px rgba(220, 38, 38, 0.5);
+}
+
+/* Input styles */
+.christmas-input {
+  width: 100%;
+  padding: 14px 18px;
+  border-radius: 12px;
+  border: 2px solid var(--christmas-border);
+  background: rgba(10, 14, 19, 0.8);
+  color: var(--christmas-text);
+  font-size: 16px;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.christmas-input:focus {
+  outline: none;
+  border-color: var(--christmas-gold);
+  box-shadow: 0 0 20px rgba(251, 191, 36, 0.3);
+  background: rgba(10, 14, 19, 0.95);
+}
+
+.christmas-input::placeholder {
+  color: var(--christmas-text-dim);
+}
+
+/* File input */
+.christmas-file-input {
+  padding: 16px;
+  border: 2px dashed var(--christmas-border);
+  border-radius: 12px;
+  background: rgba(10, 14, 19, 0.5);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.christmas-file-input:hover {
+  border-color: var(--christmas-gold);
+  background: rgba(10, 14, 19, 0.7);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--christmas-dark);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--christmas-red), var(--christmas-green));
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, var(--christmas-gold), var(--christmas-red));
+}
+
+/* Ensure content is above animations */
+main, section, header, footer {
+  position: relative;
+  z-index: 2;
+}
+
+/* CTA Link hover effects */
+.cta-link {
+  cursor: pointer;
+}
+
+.cta-link:hover:not(.cta-disabled) {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(220, 38, 38, 0.3);
+}
+
+.cta-disabled {
+  cursor: not-allowed;
+}
+
+.thecon-logo-link {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.thecon-logo-link:hover {
+  opacity: 1;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+  /* Reduce animations on mobile for better performance */
+  body::before {
+    animation-duration: 30s;
+    opacity: 0.4;
+  }
+  
+  body::after {
+    opacity: 0.2;
+  }
+  
+  /* Larger touch targets */
+  .christmas-button {
+    min-height: 48px;
+    padding: 14px 20px;
+    font-size: 16px;
+  }
+  
+  .christmas-input {
+    font-size: 16px; /* Prevents zoom on iOS */
+    padding: 16px;
+  }
+  
+  /* Better spacing for mobile */
+  .christmas-card {
+    padding: 20px;
+  }
+  
+  /* Larger badges */
+  .christmas-badge {
+    padding: 10px 16px;
+    font-size: 15px;
+  }
+  
+  /* CTA cards full width on mobile */
+  .cta-link {
+    padding: 28px 20px;
+    min-height: 120px;
+  }
+  
+  /* Prevent text selection on buttons */
+  button, .christmas-button, .cta-link {
+    -webkit-tap-highlight-color: rgba(220, 38, 38, 0.3);
+    -webkit-touch-callout: none;
+    user-select: none;
+  }
+  
+  /* Better scrollbar on mobile */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small screens */
+  .christmas-title {
+    font-size: 32px !important;
+  }
+  
+  .christmas-button {
+    font-size: 14px;
+    padding: 12px 16px;
+  }
+  
+  .christmas-card {
+    padding: 16px;
+    border-radius: 16px;
+  }
+  
+  /* Single column layout */
+  .cta-link {
+    padding: 24px 16px;
+  }
+  
+  /* Vote grid - 2 columns on very small screens */
+  .vote-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 12px !important;
+  }
+}
+
+/* Additional mobile optimizations */
+@media (max-width: 768px) {
+  /* Vote grid - 2 columns on mobile */
+  .vote-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* File input better on mobile */
+  .christmas-file-input input[type="file"] {
+    font-size: 16px !important;
+  }
+  
+  /* Better spacing for cards */
+  .christmas-card > * {
+    margin-bottom: 16px;
+  }
+  
+  /* Prevent horizontal scroll */
+  body {
+    overflow-x: hidden;
+  }
+  
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  /* TV layout - stack on mobile */
+  .tv-layout {
+    flex-direction: column !important;
+  }
+  
+  /* TV grid - responsive columns */
+  .tv-grid {
+    grid-template-columns: repeat(3, 1fr) !important;
+  }
+}
+
+/* TV Screen Optimizations */
+.tv-main {
+  overflow-x: hidden;
+}
+
+.tv-container {
+  min-height: calc(100vh - 80px);
+}
+
+.tv-participant-card {
+  cursor: pointer;
+}
+
+.tv-participant-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 16px 40px rgba(220, 38, 38, 0.4);
+}
+
+.tv-qr-card-inline {
+  flex-shrink: 0;
+}
+
+.tv-focus-card {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.tv-focus-card * {
+  transition: inherit;
+}
+
+@media (max-width: 1400px) {
+  .tv-qr-card-inline {
+    min-width: 280px !important;
+  }
+}
+
+@media (max-width: 1023px) {
+  /* Mobile: hide QR card in header, show full width */
+  .tv-qr-card-inline {
+    display: none !important;
+  }
+  
+  .tv-container header {
+    flex-direction: column !important;
+  }
+}
+
+@media (min-width: 769px) {
+  /* Desktop: TV layout side by side */
+  .tv-layout {
+    display: grid !important;
+    grid-template-columns: 1.4fr 0.6fr !important;
+  }
+  
+  /* Desktop: TV grid 5 columns */
+  .tv-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  }
+  
+  /* Large TV screens */
+  @media (min-width: 1400px) {
+    .tv-grid-large {
+      grid-template-columns: repeat(5, 1fr) !important;
+      gap: 32px !important;
+    }
+    
+    .tv-container {
+      grid-template-columns: 1fr 420px !important;
+      gap: 40px !important;
+    }
+    
+    .tv-main {
+      padding: 60px !important;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  /* Extra small: TV grid 2 columns */
+  .tv-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}
