@@ -47,12 +47,6 @@ export async function POST(req: Request) {
 
     if (insErr) throw insErr;
 
-    // Store device_id in votes table for tracking (even if not voted yet)
-    // This helps us find the participant later
-    await supabaseAdmin
-      .from("votes")
-      .upsert({ device_id: deviceId, participant_id: participant.id }, { onConflict: "device_id" });
-
     const { error: updErr } = await supabaseAdmin
       .from("device_state")
       .update({ has_uploaded: true })

@@ -22,26 +22,7 @@ export async function GET() {
       return NextResponse.json({ participant: null });
     }
 
-    // Find participant by checking storage paths or votes
-    // First try votes table
-    const { data: vote } = await supabaseAdmin
-      .from("votes")
-      .select("participant_id")
-      .eq("device_id", deviceId)
-      .limit(1)
-      .single();
-
-    if (vote?.participant_id) {
-      const { data: participant } = await supabaseAdmin
-        .from("participants")
-        .select("id,nickname,photo_url,votes_count")
-        .eq("id", vote.participant_id)
-        .single();
-
-      return NextResponse.json({ participant });
-    }
-
-    // Alternative: find by storage path pattern (device_id in photo_url)
+    // Find participant by storage path pattern (device_id in photo_url)
     const { data: participants } = await supabaseAdmin
       .from("participants")
       .select("id,nickname,photo_url,votes_count")
