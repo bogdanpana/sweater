@@ -56,7 +56,11 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true, participant });
   } catch (e: any) {
-    return NextResponse.json({ error: e?.message || "Upload failed" }, { status: 500 });
+    console.error("Upload error:", e);
+    return NextResponse.json({
+      error: e?.message || "Upload failed",
+      details: process.env.NODE_ENV === 'development' ? e?.stack : undefined
+    }, { status: 500 });
   }
 }
 
