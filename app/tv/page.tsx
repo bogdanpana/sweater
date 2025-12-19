@@ -187,22 +187,6 @@ export default function TvPage() {
               }}>
                 🏆 Leaderboard
               </h1>
-              {!isMobile && (
-                <div style={{
-                  opacity: 0.9,
-                  fontSize: "16px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 8,
-                  padding: "8px 16px",
-                  borderRadius: 16,
-                  background: "rgba(220, 38, 38, 0.2)",
-                  border: "2px solid rgba(220, 38, 38, 0.3)"
-                }}>
-                  <span>🔴</span>
-                  <Countdown initialHours={5} />
-                </div>
-              )}
             </div>
             <div style={{
               fontSize: "16px",
