@@ -96,8 +96,7 @@ export default function TvPage() {
   const [useDemo, setUseDemo] = useState(true);
   const [isMobile, setIsMobile] = useState(false);
 
-  const base = process.env.NEXT_PUBLIC_BASE_URL || "";
-  const qrUrl = `${base}/`;
+  const qrUrl = "https://sweater-vercel.vercel.app/";
 
   useEffect(() => {
     let alive = true;
@@ -156,140 +155,167 @@ export default function TvPage() {
   }, []);
 
   return (
-    <main className="tv-main" style={{ 
+    <main className="tv-main" style={{
       padding: "40px",
       minHeight: "100vh",
       background: "linear-gradient(135deg, #0a0e13 0%, #1a1f2e 50%, #0a0e13 100%)"
     }}>
-      <div className="tv-container" style={{ 
+      <div className="tv-container" style={{
         maxWidth: 1920,
         margin: "0 auto",
-        height: "100%"
+        height: "100%",
+        display: "flex",
+        gap: 32
       }}>
-        {/* Main Leaderboard Section */}
-        <section className="christmas-card" style={{ 
-          padding: "24px 40px",
-          minHeight: "calc(100vh - 48px)",
-          position: "relative"
+        {/* Left: Leaderboard */}
+        <section className="christmas-card" style={{
+          flex: 1,
+          padding: "24px 32px",
+          minHeight: "calc(100vh - 80px)",
+          position: "relative",
+          display: "flex",
+          flexDirection: "column"
         }}>
-          {/* Header with QR Card integrated */}
-          <div style={{ 
-            display: "flex", 
-            justifyContent: "space-between",
-            alignItems: "flex-start",
-            marginBottom: 24,
-            gap: 32
-          }}>
-            <div style={{ flex: 1 }}>
-              <h1 className="christmas-title" style={{ 
-                margin: 0, 
-                fontSize: "48px",
-                lineHeight: 1.1,
-                marginBottom: 4
-              }}>
-                🏆 Leaderboard
-              </h1>
-              <div style={{ 
-                fontSize: "20px",
-                opacity: 0.85,
-                marginBottom: 12,
-                color: "#fbbf24",
-                fontWeight: 600
-              }}>
-                Ugliest Christmas Sweater Contest
-              </div>
-              {!isMobile && (
-                <div style={{ 
-                  opacity: 0.9,
-                  fontSize: "18px",
-                  display: "flex",
-                  alignItems: "center",
-                  gap: 10,
-                  padding: "10px 20px",
-                  borderRadius: 20,
-                  background: "rgba(220, 38, 38, 0.2)",
-                  border: "2px solid rgba(220, 38, 38, 0.3)",
-                  width: "fit-content",
-                  marginTop: 8
-                }}>
-                  <span>🔴</span>
-                  <Countdown initialHours={5} />
-                </div>
-              )}
-            </div>
-            
-            {/* QR Card - Top Right */}
-            <aside className="tv-qr-card-inline" style={{ 
-              padding: "24px",
-              minWidth: "320px",
-              background: "rgba(10, 14, 19, 0.8)",
-              borderRadius: 20,
-              border: "2px solid rgba(220, 38, 38, 0.3)",
-              boxShadow: "0 8px 24px rgba(0, 0, 0, 0.3)"
+          {/* Header */}
+          <div style={{ marginBottom: 24 }}>
+            <h1 className="christmas-title" style={{
+              margin: 0,
+              fontSize: "48px",
+              lineHeight: 1.1,
+              marginBottom: 4
             }}>
-              <h2 className="christmas-title" style={{ 
-                margin: 0, 
-                fontSize: "24px", 
-                marginBottom: 16,
-                textAlign: "center"
-              }}>
-                📱 Scanează și votează
-              </h2>
-              <p style={{
-                marginTop: 12,
+              🏆 Leaderboard
+            </h1>
+            <div style={{
+              fontSize: "20px",
+              opacity: 0.85,
+              marginBottom: 12,
+              color: "#fbbf24",
+              fontWeight: 600
+            }}>
+              Ugliest Christmas Sweater Contest
+            </div>
+            {!isMobile && (
+              <div style={{
                 opacity: 0.9,
-                lineHeight: 1.5,
-                fontSize: "14px",
-                marginBottom: 20,
-                textAlign: "center"
+                fontSize: "18px",
+                display: "flex",
+                alignItems: "center",
+                gap: 10,
+                padding: "10px 20px",
+                borderRadius: 20,
+                background: "rgba(220, 38, 38, 0.2)",
+                border: "2px solid rgba(220, 38, 38, 0.3)",
+                width: "fit-content",
+                marginTop: 8
               }}>
-                Un vot + un upload per device.
-                <br />
-                Fără conturi. Doar pulovere. 🎄
-              </p>
-
-              <div style={{ 
-                padding: "16px", 
-                borderRadius: 16, 
-                border: "2px solid rgba(220, 38, 38, 0.2)",
-                background: "rgba(0, 0, 0, 0.3)"
-              }}>
-                <div style={{ 
-                  fontSize: "12px", 
-                  opacity: 0.8, 
-                  marginBottom: 12,
-                  fontWeight: 600,
-                  color: "#fbbf24",
-                  textAlign: "center"
-                }}>
-                  🔗 Link pentru QR:
-                </div>
-                <div style={{ 
-                  fontWeight: 700, 
-                  wordBreak: "break-all",
-                  fontSize: "12px",
-                  color: "#fef3c7",
-                  padding: "12px",
-                  background: "rgba(0, 0, 0, 0.4)",
-                  borderRadius: 8,
-                  fontFamily: "monospace",
-                  textAlign: "center",
-                  lineHeight: 1.4
-                }}>
-                  {qrUrl}
-                </div>
+                <span>🔴</span>
+                <Countdown initialHours={5} />
               </div>
-            </aside>
+            )}
           </div>
 
-          {isMobile ? (
-            <div style={{ maxHeight: "calc(100vh - 300px)", overflowY: "auto" }}>
-              <MobileLeaderboard participants={sorted} />
-            </div>
-          ) : (
-            <TvLeaderboard participants={sorted} />
-          )}
+          {/* Leaderboard Content */}
+          <div style={{ flex: 1, overflow: "hidden" }}>
+            {isMobile ? (
+              <div style={{ maxHeight: "100%", overflowY: "auto" }}>
+                <MobileLeaderboard participants={sorted} />
+              </div>
+            ) : (
+              <TvLeaderboard participants={sorted} />
+            )}
+          </div>
         </section>
+
+        {/* Right: QR Code Card */}
+        {!isMobile && (
+          <aside className="tv-qr-card" style={{
+            width: "380px",
+            flexShrink: 0,
+            padding: "32px",
+            background: "rgba(10, 14, 19, 0.8)",
+            borderRadius: 20,
+            border: "2px solid rgba(220, 38, 38, 0.3)",
+            boxShadow: "0 8px 24px rgba(0, 0, 0, 0.3)",
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            minHeight: "calc(100vh - 80px)"
+          }}>
+            <h2 className="christmas-title" style={{
+              margin: 0,
+              fontSize: "28px",
+              marginBottom: 24,
+              textAlign: "center"
+            }}>
+              📱 Scanează și votează
+            </h2>
+
+            {/* QR Code Image */}
+            <div style={{
+              background: "white",
+              padding: "20px",
+              borderRadius: 16,
+              marginBottom: 24
+            }}>
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=${encodeURIComponent(qrUrl)}`}
+                alt="QR Code"
+                width="280"
+                height="280"
+                style={{ display: "block" }}
+              />
+            </div>
+
+            <p style={{
+              marginTop: 0,
+              opacity: 0.9,
+              lineHeight: 1.6,
+              fontSize: "16px",
+              marginBottom: 24,
+              textAlign: "center"
+            }}>
+              Un vot + un upload per device.
+              <br />
+              Fără conturi. Doar pulovere. 🎄
+            </p>
+
+            <div style={{
+              padding: "16px",
+              borderRadius: 12,
+              border: "2px solid rgba(220, 38, 38, 0.2)",
+              background: "rgba(0, 0, 0, 0.3)",
+              width: "100%"
+            }}>
+              <div style={{
+                fontSize: "13px",
+                opacity: 0.8,
+                marginBottom: 8,
+                fontWeight: 600,
+                color: "#fbbf24",
+                textAlign: "center"
+              }}>
+                🔗 Link direct:
+              </div>
+              <div style={{
+                fontWeight: 700,
+                wordBreak: "break-all",
+                fontSize: "14px",
+                color: "#fef3c7",
+                padding: "12px",
+                background: "rgba(0, 0, 0, 0.4)",
+                borderRadius: 8,
+                fontFamily: "monospace",
+                textAlign: "center",
+                lineHeight: 1.5
+              }}>
+                {qrUrl}
+              </div>
+            </div>
+          </aside>
+        )}
       </div>
     </main>
   );
