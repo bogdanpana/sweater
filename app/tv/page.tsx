@@ -156,69 +156,68 @@ export default function TvPage() {
 
   return (
     <main className="tv-main" style={{
-      padding: "40px",
-      minHeight: "100vh",
-      background: "linear-gradient(135deg, #0a0e13 0%, #1a1f2e 50%, #0a0e13 100%)"
+      padding: "20px 32px",
+      height: "100vh",
+      background: "linear-gradient(135deg, #0a0e13 0%, #1a1f2e 50%, #0a0e13 100%)",
+      overflow: "hidden"
     }}>
       <div className="tv-container" style={{
-        maxWidth: 1920,
-        margin: "0 auto",
+        maxWidth: "100%",
         height: "100%",
         display: "flex",
-        gap: 32
+        gap: 24
       }}>
         {/* Left: Leaderboard */}
         <section className="christmas-card" style={{
           flex: 1,
-          padding: "24px 32px",
-          minHeight: "calc(100vh - 80px)",
+          padding: "20px 24px",
+          height: "100%",
           position: "relative",
           display: "flex",
-          flexDirection: "column"
+          flexDirection: "column",
+          overflow: "hidden"
         }}>
-          {/* Header */}
-          <div style={{ marginBottom: 24 }}>
-            <h1 className="christmas-title" style={{
-              margin: 0,
-              fontSize: "48px",
-              lineHeight: 1.1,
-              marginBottom: 4
-            }}>
-              🏆 Leaderboard
-            </h1>
+          {/* Header - Compact */}
+          <div style={{ marginBottom: 16, flexShrink: 0 }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 8 }}>
+              <h1 className="christmas-title" style={{
+                margin: 0,
+                fontSize: "36px",
+                lineHeight: 1
+              }}>
+                🏆 Leaderboard
+              </h1>
+              {!isMobile && (
+                <div style={{
+                  opacity: 0.9,
+                  fontSize: "16px",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 8,
+                  padding: "8px 16px",
+                  borderRadius: 16,
+                  background: "rgba(220, 38, 38, 0.2)",
+                  border: "2px solid rgba(220, 38, 38, 0.3)"
+                }}>
+                  <span>🔴</span>
+                  <Countdown initialHours={5} />
+                </div>
+              )}
+            </div>
             <div style={{
-              fontSize: "20px",
+              fontSize: "16px",
               opacity: 0.85,
-              marginBottom: 12,
               color: "#fbbf24",
               fontWeight: 600
             }}>
               Ugliest Christmas Sweater Contest
             </div>
-            {!isMobile && (
-              <div style={{
-                opacity: 0.9,
-                fontSize: "18px",
-                display: "flex",
-                alignItems: "center",
-                gap: 10,
-                padding: "10px 20px",
-                borderRadius: 20,
-                background: "rgba(220, 38, 38, 0.2)",
-                border: "2px solid rgba(220, 38, 38, 0.3)",
-                width: "fit-content",
-                marginTop: 8
-              }}>
-                <span>🔴</span>
-                <Countdown initialHours={5} />
-              </div>
-            )}
           </div>
 
           {/* Leaderboard Content */}
-          <div style={{ flex: 1, overflow: "hidden" }}>
+          <div style={{ flex: 1, overflow: "hidden", minHeight: 0 }}>
             {isMobile ? (
-              <div style={{ maxHeight: "100%", overflowY: "auto" }}>
+              <div style={{ height: "100%", overflowY: "auto" }}>
                 <MobileLeaderboard participants={sorted} />
               </div>
             ) : (
@@ -227,12 +226,12 @@ export default function TvPage() {
           </div>
         </section>
 
-        {/* Right: QR Code Card */}
+        {/* Right: QR Code Card - Compact */}
         {!isMobile && (
           <aside className="tv-qr-card" style={{
-            width: "380px",
+            width: "340px",
             flexShrink: 0,
-            padding: "32px",
+            padding: "24px",
             background: "rgba(10, 14, 19, 0.8)",
             borderRadius: 20,
             border: "2px solid rgba(220, 38, 38, 0.3)",
@@ -241,30 +240,31 @@ export default function TvPage() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            minHeight: "calc(100vh - 80px)"
+            height: "100%"
           }}>
             <h2 className="christmas-title" style={{
               margin: 0,
-              fontSize: "28px",
-              marginBottom: 24,
-              textAlign: "center"
+              fontSize: "24px",
+              marginBottom: 20,
+              textAlign: "center",
+              lineHeight: 1.2
             }}>
-              📱 Scanează și votează
+              📱 Scanează<br/>și votează
             </h2>
 
             {/* QR Code Image */}
             <div style={{
               background: "white",
-              padding: "20px",
-              borderRadius: 16,
-              marginBottom: 24
+              padding: "16px",
+              borderRadius: 12,
+              marginBottom: 20
             }}>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`https://api.qrserver.com/v1/create-qr-code/?size=280x280&data=${encodeURIComponent(qrUrl)}`}
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(qrUrl)}`}
                 alt="QR Code"
-                width="280"
-                height="280"
+                width="240"
+                height="240"
                 style={{ display: "block" }}
               />
             </div>
@@ -272,9 +272,9 @@ export default function TvPage() {
             <p style={{
               marginTop: 0,
               opacity: 0.9,
-              lineHeight: 1.6,
-              fontSize: "16px",
-              marginBottom: 24,
+              lineHeight: 1.5,
+              fontSize: "14px",
+              marginBottom: 20,
               textAlign: "center"
             }}>
               Un vot + un upload per device.
@@ -283,16 +283,16 @@ export default function TvPage() {
             </p>
 
             <div style={{
-              padding: "16px",
-              borderRadius: 12,
+              padding: "12px",
+              borderRadius: 10,
               border: "2px solid rgba(220, 38, 38, 0.2)",
               background: "rgba(0, 0, 0, 0.3)",
               width: "100%"
             }}>
               <div style={{
-                fontSize: "13px",
+                fontSize: "11px",
                 opacity: 0.8,
-                marginBottom: 8,
+                marginBottom: 6,
                 fontWeight: 600,
                 color: "#fbbf24",
                 textAlign: "center"
@@ -302,14 +302,14 @@ export default function TvPage() {
               <div style={{
                 fontWeight: 700,
                 wordBreak: "break-all",
-                fontSize: "14px",
+                fontSize: "12px",
                 color: "#fef3c7",
-                padding: "12px",
+                padding: "10px",
                 background: "rgba(0, 0, 0, 0.4)",
-                borderRadius: 8,
+                borderRadius: 6,
                 fontFamily: "monospace",
                 textAlign: "center",
-                lineHeight: 1.5
+                lineHeight: 1.4
               }}>
                 {qrUrl}
               </div>
