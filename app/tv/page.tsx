@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import type { Participant } from "@/lib/types";
 import MobileLeaderboard from "./components/MobileLeaderboard";
 import TvLeaderboard from "./components/TvLeaderboard";
-import Countdown from "./components/Countdown";
 
 // Demo participants pentru preview
 const DEMO_PARTICIPANTS: Participant[] = [
